@@ -27,10 +27,10 @@ const formSchema = z.object({
   message: z.string().min(10, {
     message: "Message must be at least 10 characters.",
   }),
-  companyName: z.string().nullable(),
+  companyName: z.string().optional(),
   phone: z
     .string()
-    .nullable()
+    .optional()
     .refine(
       (value) => {
         if (value && !/^\d+$/.test(value)) {
