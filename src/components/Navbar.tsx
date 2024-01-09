@@ -9,7 +9,7 @@ function Navbar() {
   const links = [
     { name: "About", href: "#about" },
     { name: "Services", href: "#services" },
-    { name: "Projects", href: "#projects" },
+    // { name: "Projects", href: "#projects" },
     { name: "Contact Us", href: "#contact", cta: true },
   ];
 

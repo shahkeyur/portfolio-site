@@ -77,7 +77,7 @@ export default function Home() {
             {services.map((service, index) => (
               <Card
                 key={index}
-                className="px-6 flex items-center justify-center flex-col py-[5rem] relative rounded-[28px]"
+                className="px-6 flex items-center justify-center flex-col py-[5rem] relative rounded-[28px]  shadow-lg"
               >
                 <div
                   className="h-full w-full z-0 absolute top-0 left-0 rounded-[28px]"
@@ -127,6 +127,20 @@ export default function Home() {
           </div>
         </div>
       </section>
+      <section>
+        <div className="space-y-6">
+          <h4 className="font-extrabold ">Out Clients</h4>
+          <div className="flex space-x-4">
+            <a href="https://vitalitydepot.ca">
+              <img
+                src="/client-vitality-logo.webp"
+                className="rounded-[28px] h-24 bg-black p-4"
+                alt="Client"
+              />
+            </a>
+          </div>
+        </div>
+      </section>
       <section id="contact">
         <div className="flex justify-between flex-col lg:flex-row space-y-8 lg:space-y-0">
           <div className="lg:max-w-[50%]">
@@ -146,7 +160,7 @@ export default function Home() {
       </section>
       <section
         style={{
-          background: `linear-gradient(#000000, 50%, #121212)`,
+          background: `linear-gradient(#ffffffd4, 30%, #d8d8d878)`,
         }}
       >
         <div className="flex justify-between flex-col lg:flex-row space-y-4">
@@ -154,7 +168,7 @@ export default function Home() {
             Your Vision. Our Expertise. <br /> Let&apos;s Build Something
           </h4>
           <div>
-            <div className="rounded-[28px] text-center bg-white">
+            <div className="rounded-[28px] text-center  shadow-lg bg-white">
               <img src="/logo-full.png" className="mx-auto" alt="Logo" />
             </div>
           </div>

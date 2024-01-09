@@ -44,9 +44,21 @@ export function ContactForm() {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    await new Promise((resolve) => setTimeout(resolve, 3000));
-    console.log(values);
-    form.reset();
+    try {
+      const res = await fetch("/api/contact-form", {
+        method: "POST",
+        body: JSON.stringify(values),
+      });
+      if (!res.ok)
+        throw new Error("Something went wrong. Please try again later.");
+
+      form.reset();
+    } catch (e) {
+      form.setError("root", {
+        type: "manual",
+        message: "Something went wrong. Please try again later.",
+      });
+    }
   }
 
   return (
@@ -112,12 +124,21 @@ export function ContactForm() {
         />
         {/* Add successful message */}
         {form.formState.isSubmitSuccessful && (
-          <FormDescription>
+          <FormDescription className="bg-green-100 p-2 rounded">
             Your message has been sent! We will get back to you as soon as
             possible. Thank you!
           </FormDescription>
+        )}{" "}
+        {form.formState.errors.root?.message && (
+          <FormDescription className="bg-red-100 p-2 rounded">
+            {form.formState.errors.root.message}
+          </FormDescription>
         )}
-        <Button disabled={form.formState.isSubmitting} type="submit">
+        <Button
+          className="dark"
+          disabled={form.formState.isSubmitting}
+          type="submit"
+        >
           {form.formState.isSubmitting ? "Sending..." : "Send"}
         </Button>
       </form>
