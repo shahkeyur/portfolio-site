@@ -4,6 +4,7 @@ import { Roboto as FontSans } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import BackToTop from "@/components/BackToTop";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -22,6 +23,17 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <Script src="https://www.googletagmanager.com/gtag/js?id=G-74K6K8ZJKR" />
+      <Script id="google-analytics">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+ 
+          gtag('config', 'G-74K6K8ZJKR');
+        `}
+      </Script>
+
       <body className={cn("min-h-screen bg-background", fontSans.className)}>
         <Navbar />
         <BackToTop />
