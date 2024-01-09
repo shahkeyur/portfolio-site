@@ -27,9 +27,34 @@ const formSchema = z.object({
   message: z.string().min(10, {
     message: "Message must be at least 10 characters.",
   }),
-  phone: z.string().min(10, {
-    message: "Phone number must be at least 10 characters.",
-  }),
+  companyName: z.string().nullable(),
+  phone: z
+    .string()
+    .nullable()
+    .refine(
+      (value) => {
+        if (value && !/^\d+$/.test(value)) {
+          return false;
+        }
+
+        return true;
+      },
+      {
+        message: "Phone number should contain only numbers.",
+      }
+    )
+    .refine(
+      (value) => {
+        if (value && value.length < 10) {
+          return false;
+        }
+
+        return true;
+      },
+      {
+        message: "Phone number be at least 10 characters.",
+      }
+    ),
 });
 
 export function ContactForm() {
@@ -40,6 +65,7 @@ export function ContactForm() {
       email: "",
       message: "",
       phone: "",
+      companyName: "",
     },
   });
 
@@ -64,20 +90,36 @@ export function ContactForm() {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <FormField
-          control={form.control}
-          name="name"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Name</FormLabel>
-              <FormControl>
-                <Input {...field} />
-              </FormControl>
+        <div className="flex flex-col lg:flex-row lg:space-x-4 space-y-8 lg:space-y-0">
+          <FormField
+            control={form.control}
+            name="name"
+            render={({ field }) => (
+              <FormItem className="lg:flex-auto">
+                <FormLabel>Name</FormLabel>
+                <FormControl>
+                  <Input {...field} />
+                </FormControl>
 
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="companyName"
+            render={({ field }) => (
+              <FormItem className="lg:flex-auto">
+                <FormLabel>Company Name (optional)</FormLabel>
+                <FormControl>
+                  <Input {...field} />
+                </FormControl>
+
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
         <div className="flex flex-col lg:flex-row lg:space-x-4 space-y-8 lg:space-y-0">
           <FormField
             control={form.control}
@@ -98,7 +140,9 @@ export function ContactForm() {
             name="phone"
             render={({ field }) => (
               <FormItem className="lg:flex-auto">
-                <FormLabel>Phone</FormLabel>
+                <FormLabel>
+                  Phone <>(optional)</>
+                </FormLabel>
                 <FormControl>
                   <Input {...field} />
                 </FormControl>
