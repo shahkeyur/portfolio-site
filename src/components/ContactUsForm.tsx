@@ -43,9 +43,12 @@ export function ContactForm() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    await new Promise((resolve) => setTimeout(resolve, 3000));
     console.log(values);
+    form.reset();
   }
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -107,7 +110,16 @@ export function ContactForm() {
             </FormItem>
           )}
         />
-        <Button type="submit">Send</Button>
+        {/* Add successful message */}
+        {form.formState.isSubmitSuccessful && (
+          <FormDescription>
+            Your message has been sent! We will get back to you as soon as
+            possible. Thank you!
+          </FormDescription>
+        )}
+        <Button disabled={form.formState.isSubmitting} type="submit">
+          {form.formState.isSubmitting ? "Sending..." : "Send"}
+        </Button>
       </form>
     </Form>
   );
