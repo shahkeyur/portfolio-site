@@ -24,13 +24,22 @@ function Navbar() {
           <div className="rounded-[20%] text-center bg-white mr-2">
             {/* Use Image component here if needed */}
             <img
+              data-aos="fade-up"
               src="/logo-full.png"
               className="mx-auto"
               width={50}
               alt="Logo"
             />
           </div>
-          <h5 className="font-bold">Ekmabyte</h5>
+          <div className="relative">
+            <h5
+              data-aos-delay="700"
+              data-aos="fade-right"
+              className="font-bold"
+            >
+              Ekmabyte
+            </h5>
+          </div>
         </span>
 
         {/* Mobile Menu Toggle Button */}

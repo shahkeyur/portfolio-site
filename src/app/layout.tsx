@@ -5,6 +5,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import BackToTop from "@/components/BackToTop";
 import Script from "next/script";
+import { AOSInit } from "@/components/AOS";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -33,6 +34,7 @@ export default function RootLayout({
           gtag('config', 'G-74K6K8ZJKR');
         `}
       </Script>
+      <AOSInit />
 
       <body className={cn("min-h-screen bg-background", fontSans.className)}>
         <Navbar />
